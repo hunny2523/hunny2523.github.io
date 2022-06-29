@@ -1,6 +1,4 @@
-
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 
 import { reminderContext } from "../context/reminderContext";
 import Cards from "./cards";

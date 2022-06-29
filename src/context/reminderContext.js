@@ -2,13 +2,13 @@
 
 // const reminderContext=createContext();
 // export default reminderContext;
-import { useReducer,useEffect } from "react";
+import { useReducer} from "react";
 import { createContext } from "react"
 
 
 
 const INITIAL_STATE = {
-    reminders: [],
+    reminders: null,
     loading: false,
     error: null
 }
@@ -16,11 +16,11 @@ const INITIAL_STATE = {
 export const reminderContext = createContext(INITIAL_STATE);
 
 const reminderReducer = (state, action) => {
-    console.log('action', action);
+    console.log('action', action, 'state', state);
     switch (action.type) {
         case "REMINDER_BEGIN":
             return {
-                reminders: null ,
+                reminders: null,
                 loading: true,
                 error: null
             };
@@ -44,7 +44,7 @@ const reminderReducer = (state, action) => {
             };
         case "DELETE_REMINDER":
             return {
-                reminders: state.reminders.filter((data)=>{return action.payload !==data._id}),
+                reminders: state.reminders.filter((data) => { return action.payload !== data._id }),
                 loading: false,
                 error: null
             };
@@ -54,6 +54,57 @@ const reminderReducer = (state, action) => {
                 loading: false,
                 error: action.payload
             };
+        case "UPDATE_REMINDER_BEGIN":
+            return {
+                ...state,
+                loading: false,
+                error: null
+            };
+        case "UPDATE_REMINDER": {
+            const updatedReminders =
+                state.reminders.map((reminder) => {
+                    if (action.payload.id === reminder._id) {
+                        return { ...reminder, name: action.payload.name, time: action.payload.time, desc: action.payload.desc }
+                        // reminder.name=action.payload.name;
+                        // reminder.time=action.payload.time;
+                        // reminder.desc=action.payload.desc;
+                    }
+                    return reminder;
+                })
+
+            console.log(updatedReminders)
+            return {
+                reminders: updatedReminders,
+                error: null,
+                loading: false
+            }
+        }
+        case "UPDATE_REMINDER_FAILURE":
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            };
+
+        case "ADD_REMINDER_FAILURE":
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            };
+        case "ADD_REMINDER_BEGIN":
+            return {
+                ...state,
+                loading: false,
+                error: null
+            };
+        case "ADD_REMINDER": {
+            return {
+                reminders: [...state.reminders,action.payload],
+                loading:false,
+                error:null
+            }
+        }
         default:
             return state;
     }
@@ -61,21 +112,17 @@ const reminderReducer = (state, action) => {
 
 export const ReminderContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reminderReducer, INITIAL_STATE);
-  
-    // useEffect(() => {
-    //   localStorage.setItem("user", JSON.stringify(state.user));
-    // }, [state.user]);
-  
+
     return (
-      <reminderContext.Provider
-        value={{
-          reminders: state.reminders,
-          loading: state.loading,
-          error: state.error,
-          dispatch,
-        }}
-      >
-        {children}
-      </reminderContext.Provider>
+        <reminderContext.Provider
+            value={{
+                reminders: state.reminders,
+                loading: state.loading,
+                error: state.error,
+                dispatch,
+            }}
+        >
+            {children}
+        </reminderContext.Provider>
     );
-  };
+};

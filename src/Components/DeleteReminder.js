@@ -34,10 +34,10 @@ export default (id) => async (dispatch) => {
     dispatch({ type: "DELETE_REMINDER_BEGIN" });
     try {
         const res = await axios.delete(`reminders/deleteReminder/${id}`);
+        alert(res.data)
         await dispatch({ type: "DELETE_REMINDER", payload: id })
-        console.log("res.data")
     } catch (error) {
         console.log(error);
-        dispatch({ type: "REMINDER_FAILURE", payload: error.response.data })
+        dispatch({ type: "DELETE_REMINDER_FAILURE", payload: error.response.data })
     }
 };

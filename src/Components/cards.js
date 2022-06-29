@@ -1,45 +1,49 @@
-import axios from 'axios'
 import React from 'react'
 import { useContext } from 'react'
 import { Card, CardBody, CardText, CardTitle, Button } from "reactstrap"
 import { reminderContext } from '../context/reminderContext'
 import DeleteReminder from './DeleteReminder'
+import UpdateComponent from './UpdateComponent'
 
 
 
 export default function Cards(props) {
 
-    
-    const {dispatch,reminders}= useContext(reminderContext);
-    const data=props.data
-    const handleDelete= (id)=>{
+
+    const { dispatch } = useContext(reminderContext);
+    const data = props.data
+    const handleDelete = (id) => {
         DeleteReminder(id)(dispatch);
     }
 
 
-    
-  return (
-      <div className="col-12 col-md-4">
-                <Card className="m-2">
-                    <CardBody>
-                        <CardTitle tag="h5">
-                            Reminder of : {data.name}
-                        </CardTitle>
-                        <CardText>
-                            Time :{data.time}
-                        </CardText>
-                        <CardText>
-                            desc :{data.desc}
-                        </CardText>
-                        <Button onClick={()=>{handleDelete(data._id)}}>
-                            Button
-                        </Button>
-                    </CardBody>
-                </Card>
-            </div>
-        )
-    }
-   
+
+
+    return (
+        <div className="col-12 col-md-4">
+            <Card className="m-2">
+                <CardBody>
+                    <CardTitle tag="h5">
+                        Reminder of : {data.name}
+                    </CardTitle>
+                    <CardText>
+                        Time :{data.time}
+                    </CardText>
+                    <CardText>
+                        desc :{data.desc}
+                    </CardText>
+                    <div className="row ms-1">
+                        <Button color='danger' className='w-25' onClick={() => { handleDelete(data._id) }}>Delete</Button>
+                        <div className="col-6">
+                        <UpdateComponent id={data._id} />
+                        </div>
+                    </div>
+                </CardBody>
+            </Card>
+        </div>
+    )
+}
+
 
 
 
