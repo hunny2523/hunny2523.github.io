@@ -3,7 +3,6 @@ import { useContext } from 'react'
 import { Card, CardBody, CardText, CardTitle, Button } from "reactstrap"
 import DeleteReminder from '../context/actions/DeleteReminder'
 import { reminderContext } from '../context/reminderContext'
-import getTimeFromReminders from './getTimeFromReminders'
 import UpdateComponent from './UpdateComponent'
 import { useToasts } from 'react-toast-notifications';
 

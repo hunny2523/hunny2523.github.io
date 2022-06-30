@@ -12,8 +12,7 @@ export default function CreateComponent(props) {
     const handleToggle = () => {
         setopen(!open);
     }
-console.log(props)
-
+    
     let name = "";
     let time = "";
     let desc = "";
