@@ -3,28 +3,28 @@ import { useContext } from 'react';
 import { Button, Modal, ModalHeader, Input, FormGroup, Form, ModalBody, ModalFooter } from 'reactstrap';
 import { reminderContext } from '../context/reminderContext';
 import createReminder from '../context/actions/createReminder';
-
-export default function CreateComponent() {
-
+import { useToasts } from 'react-toast-notifications';
+export default function CreateComponent(props) {
+    const { addToast } = useToasts();
     const { dispatch } = useContext(reminderContext);
     const [open, setopen] = useState(false);
 
     const handleToggle = () => {
         setopen(!open);
     }
-
+console.log(props)
 
     let name = "";
     let time = "";
     let desc = "";
-    const handleCreate = (e) => {
-        e.preventDefault();
+    const handleCreate = () => {
         const body = {
             name: name?.value,
             time: time?.value+":00",
             desc: desc?.value
         }
         createReminder(body)(dispatch);
+        addToast('Created Successfully', { appearance: 'success', autoDismiss: true });
         handleToggle();
     }
     return (

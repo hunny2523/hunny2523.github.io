@@ -3,9 +3,9 @@ import { useContext } from 'react';
 import { Button, Modal, ModalHeader,Input,FormGroup, Form,ModalBody, ModalFooter } from 'reactstrap';
 import { reminderContext } from '../context/reminderContext';
 import updateReminder from '../context/actions/updateReminder';
-
+import { useToasts } from 'react-toast-notifications';
 export default function UpdateComponent({id}) {
- 
+    const { addToast } = useToasts();
     const {dispatch}=useContext(reminderContext);
     const [open, setopen] = useState(false);
 
@@ -26,6 +26,7 @@ export default function UpdateComponent({id}) {
             id:id
         }
         updateReminder(body)(dispatch);
+        addToast('Updated Successfully', { appearance: 'success'  ,autoDismiss: true});
         handleToggle();
     } 
     return (

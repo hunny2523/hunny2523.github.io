@@ -7,7 +7,6 @@ export default (body) => async (dispatch) => {
     try {
         console.log(body.id);
         const res = await axios.put(`reminders/updateReminder/${body.id}`,body);
-        alert(res.data)
         await dispatch({ type: "UPDATE_REMINDER", payload: body })
     } catch (error) {
         console.log(error);

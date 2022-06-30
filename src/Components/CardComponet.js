@@ -5,7 +5,7 @@ import Cards from "./cards";
 import getTimeFromReminders from "./getTimeFromReminders";
 
 // import reminderFetch from "../hooks/reminderFetch";
-export default function CardComponet() {
+export default function CardComponet(props) {
     const {reminders,loading,dispatch}=useContext(reminderContext);
  
 
@@ -22,7 +22,7 @@ export default function CardComponet() {
             {!loading &&(
             !reminders?<h1>No reminders</h1>: reminders.map((data)=>{
                     return(
-                    <Cards data={data} key={data._id}/>)
+                    <Cards data={data} showAlert={props.showAlert} key={data._id}/>)
                 }))}  
             </div>
         </div>

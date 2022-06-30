@@ -5,16 +5,17 @@ import DeleteReminder from '../context/actions/DeleteReminder'
 import { reminderContext } from '../context/reminderContext'
 import getTimeFromReminders from './getTimeFromReminders'
 import UpdateComponent from './UpdateComponent'
-
+import { useToasts } from 'react-toast-notifications';
 
 
 export default function Cards(props) {
 
-
+    const { addToast } = useToasts();
     const { dispatch,reminders } = useContext(reminderContext);
     const data = props.data
     const handleDelete = (id) => {
         DeleteReminder(id)(dispatch);
+        addToast('Deleted Successfully', { appearance: 'success' ,autoDismiss: true});
     }
 
    

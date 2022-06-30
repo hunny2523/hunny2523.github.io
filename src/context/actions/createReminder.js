@@ -10,7 +10,6 @@ export default (body)=>async (dispatch) => {
     try {
         console.log(body);
         const res = await axios.post(`reminders/createReminder/`,body);
-        alert("Created")
         await dispatch({ type: "ADD_REMINDER", payload: res.data })
     } catch (error) {
         console.log(error);

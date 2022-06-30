@@ -9,6 +9,7 @@ import { reminderContext } from "../../context/reminderContext";
 import { useState } from "react";
 import Cards from "../../Components/cards";
 import getTimeFromReminders from "../../Components/getTimeFromReminders";
+import Alert from "../../Components/AlertComponent";
 
 
 export default function Home() {
@@ -26,14 +27,25 @@ export default function Home() {
   // console.log("current time" + currentTime);
 
   useEffect(() => {
-    var timer = setInterval(() => setAlert(), 1000)
+    var timer = setInterval(() => setAlarm(), 1000)
     return function cleanup() {
       clearInterval(timer)
     }
   });
 
-  const setAlert = () => {
-     
+
+  const [alerts, setAlerts] = useState();
+  const showAlert = (message, type) => {
+    setAlerts({
+      msg: message,
+      Type: type,
+    });
+    setTimeout(() => {
+      setAlerts(null);
+    }, 2000);
+  };
+
+  const setAlarm = () => {
       const date = new Date();
       const currentTime=date.toLocaleTimeString(('it-IT'))
       time.map((time) => {
@@ -45,34 +57,17 @@ export default function Home() {
   }
 
 
-
-
-
-  //  const checkAlarmClock=()=>{
-  //   if(alarmTime == 'undefined' || !alarmTime) {
-  //     console.log("no time")
-  //   } else {
-  //     if(date.toLocaleTimeString() === alarmTime) {
-  //       alert("its time!");
-  //     } else {
-  //       console.log("not yet");
-  //     }
-  //   }   
-  // }
-
-
-
-
   return (
 
     <div>
       <NavbarComponent />
+      <Alert alerts={alerts}/>
       <CurrentTimeComponent />
       <h3 className="mt-5 text-center">My Reminders</h3>
       <div className="text-center">
-        <CreateComponent />
+        <CreateComponent showAlert={showAlert}/>
       </div>
-      <CardComponet />
+      <CardComponet showAlert={showAlert}/>
       {/* footer */}
     </div>
   )
