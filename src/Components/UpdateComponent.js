@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useContext } from 'react';
 import { Button, Modal, ModalHeader,Input,FormGroup, Form,ModalBody, ModalFooter } from 'reactstrap';
 import { reminderContext } from '../context/reminderContext';
-import updateReminder from './updateReminder';
+import updateReminder from '../context/actions/updateReminder';
 
 export default function UpdateComponent({id}) {
  
@@ -21,7 +21,7 @@ export default function UpdateComponent({id}) {
         e.preventDefault();
         const body={
             name:name?.value,
-            time:time?.value,
+            time:time?.value+":00",
             desc:desc?.value,
             id:id
         }
@@ -40,7 +40,7 @@ export default function UpdateComponent({id}) {
                                     innerRef={(input) => name = input}/>
                             </FormGroup>
                             <FormGroup>
-                                <Input required type="text" name="time" placeholder="Reminder Time"
+                                <Input required type="time" name="time" placeholder="Reminder Time"
                                   innerRef={(input) => time = input} />
                             </FormGroup>
                             <FormGroup>

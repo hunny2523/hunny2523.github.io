@@ -10,7 +10,8 @@ import { createContext } from "react"
 const INITIAL_STATE = {
     reminders: null,
     loading: false,
-    error: null
+    error: null,
+    time:null
 }
 
 export const reminderContext = createContext(INITIAL_STATE);
@@ -26,6 +27,7 @@ const reminderReducer = (state, action) => {
             };
         case "GET_REMINDERS":
             return {
+                ...state,
                 reminders: action.payload,
                 loading: false,
                 error: null
@@ -34,7 +36,8 @@ const reminderReducer = (state, action) => {
             return {
                 reminders: null,
                 loading: false,
-                error: action.payload
+                error: action.payload,
+                time:null
             };
         case "DELETE_REMINDER_BEGIN":
             return {
@@ -44,6 +47,7 @@ const reminderReducer = (state, action) => {
             };
         case "DELETE_REMINDER":
             return {
+                ...state,
                 reminders: state.reminders.filter((data) => { return action.payload !== data._id }),
                 loading: false,
                 error: null
@@ -105,6 +109,14 @@ const reminderReducer = (state, action) => {
                 error:null
             }
         }
+        case "SET_TIME":{
+            return {
+                ...state,
+                time: action.payload,
+                loading:false,
+                error:null
+            }
+        }
         default:
             return state;
     }
@@ -119,6 +131,7 @@ export const ReminderContextProvider = ({ children }) => {
                 reminders: state.reminders,
                 loading: state.loading,
                 error: state.error,
+                time:state.time,
                 dispatch,
             }}
         >

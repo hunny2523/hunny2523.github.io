@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useContext } from 'react'
 import { Card, CardBody, CardText, CardTitle, Button } from "reactstrap"
+import DeleteReminder from '../context/actions/DeleteReminder'
 import { reminderContext } from '../context/reminderContext'
-import DeleteReminder from './DeleteReminder'
+import getTimeFromReminders from './getTimeFromReminders'
 import UpdateComponent from './UpdateComponent'
 
 
@@ -10,13 +11,13 @@ import UpdateComponent from './UpdateComponent'
 export default function Cards(props) {
 
 
-    const { dispatch } = useContext(reminderContext);
+    const { dispatch,reminders } = useContext(reminderContext);
     const data = props.data
     const handleDelete = (id) => {
         DeleteReminder(id)(dispatch);
     }
 
-
+   
 
 
     return (
