@@ -21,7 +21,7 @@ export default function Cards(props) {
 
 
     return (
-        <div className="col-12 col-md-4">
+        <div className="col-md-4">
             <Card className="m-2">
                 <CardBody>
                     <CardTitle tag="h5">

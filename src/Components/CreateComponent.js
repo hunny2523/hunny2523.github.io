@@ -12,7 +12,7 @@ export default function CreateComponent(props) {
     const handleToggle = () => {
         setopen(!open);
     }
-    
+
     let name = "";
     let time = "";
     let desc = "";
@@ -28,7 +28,7 @@ export default function CreateComponent(props) {
     }
     return (
         <div>
-            <Button color="dark" className='m-4' onClick={handleToggle}>Create Reminder</Button>
+            <Button color="danger" className='ms-0' onClick={handleToggle}>Create Reminder</Button>
             <Modal isOpen={open} toggle={handleToggle} >
                 <ModalHeader toggle={handleToggle}>Enter Details</ModalHeader>
                 <ModalBody>

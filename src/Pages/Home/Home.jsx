@@ -60,8 +60,8 @@ export default function Home() {
     <div>
       <NavbarComponent />
       <CurrentTimeComponent />
-      <h3 className="mt-5 text-center">My Reminders</h3>
-      <div className="text-center">
+      <h3 className="mt-4 text-center">My Reminders</h3>
+      <div className="text-center m-3">
         <CreateComponent />
       </div>
       <CardComponet />
