@@ -35,7 +35,14 @@ export default (id) => async (dispatch) => {
 
     dispatch({ type: "DELETE_REMINDER_BEGIN" });
     try {
-        const res = await axios.delete(`reminders/deleteReminder/${id}`);
+        console.log(id)
+        let data=JSON.parse(localStorage.getItem("reminders"));
+        data=data.filter((reminder)=>{
+            if(reminder.id!==id){
+                return reminder;
+            }
+        })
+        localStorage.setItem("reminders",JSON.stringify(data));
         await dispatch({ type: "DELETE_REMINDER", payload: id });
    
     } catch (error) {

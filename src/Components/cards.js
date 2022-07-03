@@ -10,7 +10,7 @@ import { useToasts } from 'react-toast-notifications';
 export default function Cards(props) {
 
     const { addToast } = useToasts();
-    const { dispatch,reminders } = useContext(reminderContext);
+    const { dispatch } = useContext(reminderContext);
     const data = props.data
     const handleDelete = (id) => {
         DeleteReminder(id)(dispatch);
@@ -34,9 +34,9 @@ export default function Cards(props) {
                         desc :{data.desc}
                     </CardText>
                     <div className="row ms-1">
-                        <Button color='danger' className='w-25' onClick={() => { handleDelete(data._id) }}>Delete</Button>
+                        <Button color='danger' className='w-25' onClick={() => { handleDelete(data.id) }}>Delete</Button>
                         <div className="col-6">
-                        <UpdateComponent id={data._id} />
+                        <UpdateComponent id={data.id} />
                         </div>
                     </div>
                 </CardBody>
@@ -44,18 +44,3 @@ export default function Cards(props) {
         </div>
     )
 }
-
-
-
-
-
-    // delete module
-             // dispatch({type:"DELETE_REMINDER_BEGIN"})
-             // try {
-             //     const res = await axios.delete(`reminders/deleteReminder/${id}`);
-             //     await dispatch({type:"DELETE_REMINDER",payload:data._id})
-             //     console.log(reminders);
-             // } catch (err) {
-             //     console.log(err);
-             //     dispatch({ type: "REMINDER_FAILURE", payload: err.response.data })
-             // }

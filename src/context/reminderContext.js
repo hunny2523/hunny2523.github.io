@@ -46,7 +46,7 @@ const reminderReducer = (state, action) => {
         case "DELETE_REMINDER":
             return {
                 ...state,
-                reminders: state.reminders.filter((data) => { return action.payload !== data._id }),
+                reminders: state.reminders.filter((data) => { return action.payload !== data.id }),
                 loading: false,
                 error: null
             };
@@ -65,11 +65,8 @@ const reminderReducer = (state, action) => {
         case "UPDATE_REMINDER": {
             const updatedReminders =
                 state.reminders.map((reminder) => {
-                    if (action.payload.id === reminder._id) {
+                    if (action.payload.id === reminder.id) {
                         return { ...reminder, name: action.payload.name, time: action.payload.time, desc: action.payload.desc }
-                        // reminder.name=action.payload.name;
-                        // reminder.time=action.payload.time;
-                        // reminder.desc=action.payload.desc;
                     }
                     return reminder;
                 })

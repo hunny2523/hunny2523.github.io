@@ -10,7 +10,6 @@ import { reminderContext } from "../../context/reminderContext";
 import useSound from 'use-sound';
 import notification from "../../../src/notification.mp3"
 import addNotification from 'react-push-notification';
-import { Button } from "reactstrap";
 export default function Home() {
 
 
@@ -45,7 +44,7 @@ export default function Home() {
   const setAlarm = () => {
       const date = new Date();
       const currentTime=date.toLocaleTimeString(('it-IT'))
-      reminders.map((reminder) => {
+      reminders && reminders.map((reminder) => {
         if (reminder.time === currentTime) {
           play();
           buttonClick(reminder.name,reminder.desc,reminder.time)

@@ -2,13 +2,25 @@
 import axios from "axios";
 
 export default (body)=>async (dispatch) => {
-    const userData=JSON.parse(localStorage.getItem("user"));
-      const id=userData._id
-    body.user=id;
+    function generateUUID() {
+        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+          var r = Math.random() * 16 | 0; var v = c === "x" ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+        });
+      };
+      body.id=generateUUID();
     dispatch({ type: "ADD_REMINDER_BEGIN" });
-    try {
-        const res = await axios.post(`reminders/createReminder/`,body);
-        await dispatch({ type: "ADD_REMINDER", payload: res.data })
+    
+    try {    
+        let data=JSON.parse(localStorage.getItem("reminders"));
+        if(data){
+            data=data.concat(body);
+            console.log(data)
+            localStorage.setItem("reminders",JSON.stringify(data));
+            await dispatch({ type: "ADD_REMINDER", payload: body })
+        }
+
+        console.log("it's completed")
     } catch (error) {
         console.log(error);
         dispatch({ type: "ADD_REMINDER_FAILURE", payload: error.response.data })

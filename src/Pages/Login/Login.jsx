@@ -15,12 +15,6 @@ export default function Login() {
   const handleChange = (e) => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
-
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-
-  // const email=useRef();
-  // const password=useRef();
   const {user, loading, error, dispatch } = useContext(authContext);
 
 
