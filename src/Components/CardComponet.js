@@ -8,11 +8,14 @@ export default function CardComponet() {
     return (
         <div className="container">
             <div className="row">
-            {!loading &&(
-            !reminders?<h1>No reminders</h1>: reminders.map((data)=>{
-                    return(
-                    <Cards data={data}  key={data.id}/>)
-                }))}  
+            {  
+            reminders && (
+
+                reminders.length===0?<h4  className=" text-primary text-center">click above button to create reminders </h4>: reminders.map((data)=>{
+                        return(
+                        <Cards data={data}  key={data.id}/>)
+                    })  
+            )}
             </div>
         </div>
     )

@@ -26,7 +26,6 @@ const reminderReducer = (state, action) => {
             };
         case "GET_REMINDERS":
             return {
-                ...state,
                 reminders: action.payload,
                 loading: false,
                 error: null
@@ -45,7 +44,6 @@ const reminderReducer = (state, action) => {
             };
         case "DELETE_REMINDER":
             return {
-                ...state,
                 reminders: state.reminders.filter((data) => { return action.payload !== data.id }),
                 loading: false,
                 error: null

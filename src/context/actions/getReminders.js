@@ -11,6 +11,7 @@ export default async (dispatch)=>{
       else{
         checkIfRemindersExists=[];
         localStorage.setItem("reminders",JSON.stringify(checkIfRemindersExists));
+        dispatch({type:"GET_REMINDERS",payload:[]});
         console.log("Not exists")
       }
   } catch (err) {
