@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useContext } from 'react';
 import { Button, Modal, ModalHeader, Input, FormGroup, Form, ModalBody, ModalFooter } from 'reactstrap';
-import { reminderContext } from '../context/reminderContext';
-import createReminder from '../context/actions/createReminder';
 import { useToasts } from 'react-toast-notifications';
+import { reminderContext } from '../../context/RTContext';
+import createReminder from '../../context/actions/REMINDERS/createReminder';
 export default function CreateComponent(props) {
     const { addToast } = useToasts();
     const { dispatch } = useContext(reminderContext);
@@ -19,7 +19,7 @@ export default function CreateComponent(props) {
     const handleCreate = () => {
         const body = {
             name: name?.value,
-            time: time?.value+":00",
+            time: time?.value,
             desc: desc?.value
         }
         createReminder(body)(dispatch);
