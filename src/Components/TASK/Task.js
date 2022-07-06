@@ -6,7 +6,7 @@ import { useToasts } from 'react-toast-notifications';
 import { FaTrash, FaPencilAlt } from "react-icons/fa";
 import UpdateTask from './UpdateTask';
 import deleteTask from '../../context/actions/TASK/deleteTask';
-import HeartCheckbox from 'react-heart-checkbox';
+// import HeartCheckbox from 'react-heart-checkbox';
 
 export default function Task(props) {
 
@@ -39,10 +39,10 @@ export default function Task(props) {
             })
         }, 10000);
     }
-const [heart, setheart] = useState(false);
-const HeartClick=()=>{
-    setheart(!heart)
-}
+// const [heart, setheart] = useState(false);
+// const HeartClick=()=>{
+//     setheart(!heart)
+// }
     return (
         <>
             <Card style={{ width: "60%" }} className="mx-auto mb-2">
@@ -61,7 +61,7 @@ const HeartClick=()=>{
                         <div className="ms-auto">
                             <FaTrash onClick={() => { handleDelete(data.id) }} color='danger'>Delete</FaTrash>
                             <UpdateTask data={data} />
-                            <HeartCheckbox style={{width:"10px",height:"10px"}} checked={heart} onClick={HeartClick} />
+    
                         </div>
                     </div>
                     <CardText>
