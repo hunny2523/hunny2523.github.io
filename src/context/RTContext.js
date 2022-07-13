@@ -1,17 +1,12 @@
-// import { createContext } from "react";
-
-// const reminderContext=createContext();
-// export default reminderContext;
 import { useReducer } from "react";
 import { createContext } from "react"
-
-
 
 const INITIAL_STATE = {
     reminders: null,
     task: null,
     loading: false,
     error: null,
+    user: null
 }
 
 export const reminderContext = createContext(INITIAL_STATE);
@@ -19,6 +14,11 @@ export const reminderContext = createContext(INITIAL_STATE);
 const reminderReducer = (state, action) => {
     console.log('action', action, 'state', state);
     switch (action.type) {
+        case "SET_USER_ID":
+            return {
+                ...state,
+                user: action.payload
+            };
         case "REMINDER_BEGIN":
             return {
                 ...state,
@@ -47,6 +47,13 @@ const reminderReducer = (state, action) => {
                 error: null
             };
         case "DELETE_REMINDER":
+            let reminderOfLocalStorage = JSON.parse(localStorage.getItem("reminders"));
+            reminderOfLocalStorage = reminderOfLocalStorage.filter((reminder) => {
+                if (reminder.id !== action.payload) {
+                    return reminder;
+                }
+            });
+            localStorage.setItem("reminders", JSON.stringify(reminderOfLocalStorage));
             return {
                 ...state,
                 reminders: state.reminders.filter((data) => { return action.payload !== data.id }),
@@ -90,10 +97,11 @@ const reminderReducer = (state, action) => {
             };
 
         case "ADD_REMINDER_FAILURE":
+            console.log(action.payload.errors)
             return {
                 ...state,
                 loading: false,
-                error: action.payload
+                error: action.payload.errors
             };
         case "ADD_REMINDER_BEGIN":
             return {
@@ -101,14 +109,13 @@ const reminderReducer = (state, action) => {
                 loading: false,
                 error: null
             };
-        case "ADD_REMINDER": {
+        case "ADD_REMINDER":
             return {
                 ...state,
                 reminders: [...state.reminders, action.payload],
                 loading: false,
                 error: null
-            }
-        };
+            };
         case "ADD_TASK_FAILURE":
             return {
                 ...state,
@@ -145,12 +152,12 @@ const reminderReducer = (state, action) => {
             };
         case "TASK_FAILURE":
             return {
-                  ...state,
+                ...state,
                 task: null,
                 loading: false,
                 error: action.payload,
             };
-            case "UPDATE_TASK_BEGIN":
+        case "UPDATE_TASK_BEGIN":
             return {
                 ...state,
                 loading: false,
@@ -177,13 +184,13 @@ const reminderReducer = (state, action) => {
                 loading: false,
                 error: action.payload
             };
-            case "DELETE_TASK_BEGIN":
+        case "DELETE_TASK_BEGIN":
             return {
                 ...state,
                 loading: false,
                 error: null
             };
-            case "DELETE_TASK":
+        case "DELETE_TASK":
             return {
                 ...state,
                 task: state.task.filter((data) => { return action.payload !== data.id }),
@@ -212,6 +219,7 @@ export const ReminderContextProvider = ({ children }) => {
                 task: state.task,
                 loading: state.loading,
                 error: state.error,
+                user: state.user,
                 // time:state.time,
                 dispatch,
             }}

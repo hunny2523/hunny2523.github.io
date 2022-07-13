@@ -25,12 +25,12 @@ export default function Cards(props) {
                     <div className="d-flex">
                         <div >
                             <CardTitle tag="h5">
-                                 {data.name}
+                                {data.name}
                             </CardTitle>
                         </div>
                         <div className="ms-auto">
                             <FaTrash color='danger' onClick={() => { handleDelete(data.id) }}>Delete</FaTrash>
-                            <UpdateComponent data={data} />
+                            {/* <UpdateComponent data={data} /> */}
                         </div>
                     </div>
                     <CardText>

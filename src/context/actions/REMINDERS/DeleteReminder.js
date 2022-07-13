@@ -1,52 +1,29 @@
-// import axios from "axios";
-// import { useEffect } from "react";
-// import { useContext } from "react";
-// import { reminderContext } from "../context/reminderContext";
-
-
-// const DeleteReminder =(id)=> {
-//     const {dispatch} = useContext(reminderContext);
-//     useEffect(async() => {
-//         try {
-//             const res = await axios.delete(`reminders/deleteReminder/${id}`);
-//             console.log(res);
-//             dispatch({type:"DELETE_REMINDER",payload:id})
-//         } catch (err) {
-//             console.log(err);
-//             dispatch({ type: "REMINDER_FAILURE", payload: err.response.data })
-//         }
-
-
-//     },[])
-//     return (
-//         <div>{alert("deleted")}</div>
-//     )
-
-
-// }
-//     export default DeleteReminder;
-
-
-
 import axios from "axios";
-
+// import { useToasts } from 'react-toast-notifications';
 
 export default (id) => async (dispatch) => {
-
+    // const { addToast } = useToasts();
     dispatch({ type: "DELETE_REMINDER_BEGIN" });
     try {
-        console.log(id)
-        let data=JSON.parse(localStorage.getItem("reminders"));
-        data=data.filter((reminder)=>{
-            if(reminder.id!==id){
-                return reminder;
-            }
-        })
-        localStorage.setItem("reminders",JSON.stringify(data));
-        await dispatch({ type: "DELETE_REMINDER", payload: id });
-   
+
+        const response = await axios
+            .delete(
+                `https://onesignal.com/api/v1/notifications/${id}?app_id=${process.env.REACT_APP_APP_ID}`,
+                {
+                    headers: {
+                        Authorization: process.env.REACT_APP_BASIC_AUTH_KEY,
+                        "Content-Type": "application/json",
+                    },
+                }
+            )
+        if (response.data.success) {
+            // addToast('Deleted Successfully', { appearance: 'success', autoDismiss: true });
+
+            await dispatch({ type: "DELETE_REMINDER", payload: id });
+        }
+
     } catch (error) {
-        console.log(error);
+        console.log(error.response.data);
         dispatch({ type: "DELETE_REMINDER_FAILURE", payload: error.response.data })
     }
 };

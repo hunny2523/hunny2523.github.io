@@ -6,24 +6,25 @@ import { reminderContext } from '../../context/RTContext';
 import createReminder from '../../context/actions/REMINDERS/createReminder';
 export default function CreateComponent(props) {
     const { addToast } = useToasts();
-    const { dispatch } = useContext(reminderContext);
+    const { dispatch, user, error } = useContext(reminderContext);
     const [open, setopen] = useState(false);
-
     const handleToggle = () => {
         setopen(!open);
     }
-
     let name = "";
     let time = "";
     let desc = "";
-    const handleCreate = () => {
+    const handleCreate = async () => {
         const body = {
             name: name?.value,
             time: time?.value,
             desc: desc?.value
         }
-        createReminder(body)(dispatch);
-        addToast('Created Successfully', { appearance: 'success', autoDismiss: true });
+        createReminder(body)(dispatch, user).then(() => {
+            addToast('Created Successfully', { appearance: 'success', autoDismiss: true });
+        }).catch((error) => {
+            addToast(error.errors[0], { appearance: 'error', autoDismiss: true });
+        });
         handleToggle();
     }
     return (

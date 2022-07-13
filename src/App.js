@@ -1,30 +1,32 @@
 
 import './App.css';
-// import OneSignal from 'react-onesignal';
+import OneSignal from 'react-onesignal';
 import Home from './Pages/Home/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
-
+import { useEffect, useContext } from 'react';
 import { ToastProvider } from 'react-toast-notifications';
 import { Notifications } from 'react-push-notification';
+import { reminderContext } from './context/RTContext';
 
 
 
 
 function App() {
 
-  // useEffect(() => {
-  //   async function OnesignalInit(){
+  const { dispatch } = useContext(reminderContext);
 
-  //     await OneSignal.init({ appId: '81b3dde3-4590-4748-876d-1446f90f66c5', allowLocalhostAsSecureOrigin: true});
-  //   }
-  //   OnesignalInit();
-  // })
+  useEffect(() => {
+    async function OnesignalInit() {
+      await OneSignal.init({ appId: process.env.REACT_APP_APP_ID, allowLocalhostAsSecureOrigin: true });
+      const user = await OneSignal.getUserId();
+      dispatch({ type: "SET_USER_ID", payload: user });
+    }
+    OnesignalInit();
+  }, [])
 
   return (
     <div>
       <ToastProvider>
-
         <Notifications />
         <Router>
           <Routes>

@@ -11,9 +11,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
 
-      <ReminderContextProvider>
-      <App />
-      </ReminderContextProvider>
-  
+  <ReminderContextProvider>
+    <App />
+  </ReminderContextProvider>
+
   // </React.StrictMode>
 );

@@ -5,7 +5,8 @@ import Cards from "./cards";
 import CreateComponent from "./CreateReminderComponent";
 
 export default function CardComponet() {
-    const { reminders } = useContext(reminderContext);
+
+    const { reminders, error } = useContext(reminderContext);
     return (
         <>
             <div className="text-center m-3">
