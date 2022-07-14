@@ -2,7 +2,6 @@
 import './App.css';
 import OneSignal from 'react-onesignal';
 import Home from './Pages/Home/Home';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect, useContext } from 'react';
 import { ToastProvider } from 'react-toast-notifications';
 import { Notifications } from 'react-push-notification';
@@ -17,9 +16,11 @@ function App() {
 
   useEffect(() => {
     async function OnesignalInit() {
+      console.log("init begin")
       await OneSignal.init({ appId: process.env.REACT_APP_APP_ID, allowLocalhostAsSecureOrigin: true });
       const user = await OneSignal.getUserId();
       dispatch({ type: "SET_USER_ID", payload: user });
+      console.log(user)
     }
     OnesignalInit();
   }, [])
@@ -28,11 +29,7 @@ function App() {
     <div>
       <ToastProvider>
         <Notifications />
-        <Router>
-          <Routes>
-            <Route exact path="/" element={<Home />}></Route>
-          </Routes>
-        </Router>
+        <Home />
       </ToastProvider>
     </div>
   );

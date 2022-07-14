@@ -1,36 +1,21 @@
-import React from 'react';
-import { useState } from 'react';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink, } from 'reactstrap';
+import React from "react";
+import { FaInfoCircle } from "react-icons/fa";
+
 
 export default function NavbarComponent() {
- const [isOpen, setisOpen] = useState(false);
- const handleToggle=()=>{
-  setisOpen(!isOpen)
- }
-  
-    return (
-      <div>
-        <Navbar color="dark" dark expand="md">
-          <NavbarBrand href="/">My Reminders</NavbarBrand>
-          <NavbarToggler onClick={handleToggle} />
-          <Collapse isOpen={isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/components/">About</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
-      </div>
-    ); 
+  const [navbarOpen, setNavbarOpen] = React.useState(false);
+  return (
+    <>
+      <nav className="p-4 md:px-8 bg-blue-900 shadow-lg text-white">
+        <div className="flex justify-between">
+          <div className="uppercase text-xl font-semibold">
+            reminder-app
+          </div>
+          <div className="text-2xl">
+            <FaInfoCircle></FaInfoCircle>
+          </div>
+        </div>
+      </nav>
+    </>
+  );
 }

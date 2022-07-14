@@ -6,7 +6,9 @@ import { reminderContext } from "../../context/RTContext";
 import TaskComponent from "../../Components/TASK/TaskComponent";
 import getReminders from "../../context/actions/REMINDERS/getReminders";
 import getTask from "../../context/actions/TASK/getTask";
-import CardComponet from "../../Components/REMINDERS/CardComponet";
+import CardComponet from "../../Components/REMINDERS/CardComponent";
+import BoxComponent from "../../Components/BoxComponent";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 export default function Home() {
   const { dispatch, reminders } = useContext(reminderContext);
   useEffect(() => {
@@ -34,17 +36,22 @@ export default function Home() {
 
   return (
     <div>
-      <NavbarComponent />
-      <CurrentTimeComponent />
-      <div className="row">
-        <div className="col-12 col-md-6">
-          <CardComponet />
+      <Router>
+        <NavbarComponent />
+        <CurrentTimeComponent />
+        <div className="md:flex md:mx-auto ">
+          <div className="md:w-5/12 lg:px-12 md:px-4  border-r-2">
+            <BoxComponent />
+          </div>
+          <div className="md:w-7/12">
+            <Routes>
+              <Route exact path="/tasks" element={< TaskComponent />}></Route>
+              <Route exact path="/reminders" element={< CardComponet />}></Route>
+              <Route exact path="/all" element={[< CardComponet />, <TaskComponent />]}></Route>
+            </Routes>
+          </div>
         </div>
-        <div className="col-12 col-md-6">
-          <TaskComponent />
-        </div>
-      </div>
-      {/* footer */}
+      </Router>
     </div>
   )
 }

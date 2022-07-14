@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react'
 import { useContext } from 'react'
-import { Card, CardBody, CardText, CardTitle } from "reactstrap"
-import UpdateComponent from './UpdateComponent'
 import { useToasts } from 'react-toast-notifications';
-import { FaTrash } from "react-icons/fa";
+import { FaRegClock, FaTrash } from "react-icons/fa";
 import DeleteReminder from '../../context/actions/REMINDERS/DeleteReminder'
 import { reminderContext } from '../../context/RTContext';
-
+const getEmoji = require('get-random-emoji')
 
 export default function Cards(props) {
 
@@ -19,27 +16,25 @@ export default function Cards(props) {
     }
 
     return (
-        <div>
-            <Card style={{ width: "60%" }} className="mx-auto mb-2">
-                <CardBody>
-                    <div className="d-flex">
-                        <div >
-                            <CardTitle tag="h5">
-                                {data.name}
-                            </CardTitle>
-                        </div>
-                        <div className="ms-auto">
-                            <FaTrash color='danger' onClick={() => { handleDelete(data.id) }}>Delete</FaTrash>
-                            {/* <UpdateComponent data={data} /> */}
-                        </div>
-                    </div>
-                    <CardText>
-                        <b>Time</b> :{data.time}
-                        <br />
-                        <b>desc</b> :{data.desc}
-                    </CardText>
-                </CardBody>
-            </Card>
-        </div >
+
+        <div className="flex justify-between border-blue-900 rounded-lg shadow-sm md:w-3/4 w-full max-h-fit border bg-white p-3 md:p-4 m-2">
+            <div >
+                <div className='flex items-center mb-2'>
+                    <h5 className="text-blue-900 text-xl leading-tight font-medium ">{data.name}</h5>
+                    <FaRegClock className='text-xl mx-2 text-blue-900'></FaRegClock>
+                    <h2 className="text-blue-900 text-xl leading-tight font-medium"> {data.time}</h2>
+                </div>
+                <p className="text-blue-900 font-semibold text-base mb-2">
+                    {data.desc}
+                </p>
+                <div>
+                    <FaTrash className='text-blue-900' onClick={() => { handleDelete(data.id) }}>Delete</FaTrash>
+                </div>
+            </div>
+            <div className='text-7xl'>
+                {getEmoji()}
+            </div>
+        </div>
+
     )
 }

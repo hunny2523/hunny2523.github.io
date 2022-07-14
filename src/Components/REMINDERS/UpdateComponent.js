@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useContext } from 'react';
-import { Button, Modal, ModalHeader, Input, FormGroup, Form, ModalBody, ModalFooter } from 'reactstrap';
 import { useToasts } from 'react-toast-notifications';
 import { FaPencilAlt } from 'react-icons/fa';
 import updateReminder from '../../context/actions/REMINDERS/updateReminder';
@@ -33,31 +32,31 @@ export default function UpdateComponent({ data }) {
     return (
         <>
             <FaPencilAlt className="ms-3" color="success" onClick={handleToggle}>Edit</FaPencilAlt>
-            <Modal isOpen={open} toggle={handleToggle} >
-                <ModalHeader toggle={handleToggle}>Enter Details</ModalHeader>
-                <ModalBody>
-                    <Form action="#" id="userinfo">
-                        <FormGroup>
-                            <Input defaultValue={data.name} required type="text" name="name" placeholder="Reminder Name"
+            <div isOpen={open} toggle={handleToggle} >
+                <div toggle={handleToggle}>Enter Details</div>
+                <div>
+                    <form action="#" id="userinfo">
+                        <div>
+                            <input defaultValue={data.name} required type="text" name="name" placeholder="Reminder Name"
                                 innerRef={(input) => name = input} />
-                        </FormGroup>
-                        <FormGroup>
-                            <Input required defaultValue={data.time} type="time" name="time" placeholder="Reminder Time"
+                        </div>
+                        <div>
+                            <input required defaultValue={data.time} type="time" name="time" placeholder="Reminder Time"
                                 innerRef={(input) => time = input} />
-                        </FormGroup>
-                        <FormGroup>
-                            <Input required type="textarea" defaultValue={data.desc} name="desc" placeholder="Description"
+                        </div>
+                        <div>
+                            <input required type="textarea" defaultValue={data.desc} name="desc" placeholder="Description"
                                 innerRef={(input) => desc = input} />
-                        </FormGroup>
-                        <Button color="danger" onClick={handleUpdate}>
+                        </div>
+                        <button color="danger" onClick={handleUpdate}>
                             Update
-                        </Button>
-                    </Form>
-                </ModalBody>
-                <ModalFooter>
+                        </button>
+                    </form>
+                </div>
+                <footer>
                     <Button color="secondary" onClick={handleToggle}>Cancel</Button>
-                </ModalFooter>
-            </Modal>
+                </footer>
+            </div>
         </>
     );
 
