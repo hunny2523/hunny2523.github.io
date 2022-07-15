@@ -9,8 +9,22 @@ import CreateTaskComponent from './TASK/CreateTaskComponent'
 export default function BoxComponent() {
     const location = useLocation();
     const { reminders, task } = useContext(reminderContext)
+
+    const CountTodayTask = () => {
+        let count = 0;
+        reminders && reminders.map((reminder) => {
+            if (reminder.time.slice(0, 11) === new Date().toISOString().slice(0, 11)) {
+                count++;
+            }
+        })
+        return (
+            <p>{count}</p>
+        )
+
+    }
+
     return (
-        <div>
+        <div >
             <div className='flex flex-wrap'>
                 <Link to="/reminders" className="w-1/2 ">
                     <div className={`m-1 border-blue-900 shadow-sm border px-3 py-4 flex justify-between  rounded-lg ${location.pathname === "/reminders" ? "shadow-md" : ""}`}>
@@ -42,14 +56,16 @@ export default function BoxComponent() {
                         <div className='text-red-600 font-bold text-4xl'>{task || reminders ? (task.length + reminders.length) : "0"}</div>
                     </div>
                 </Link>
-                <Link className='w-1/2' to="/reminders">
+
+
+                <Link className='w-1/2' to="/today">
                     <div className={`m-1 border-blue-900 shadow-sm border px-3 py-4 flex justify-between  rounded-lg ${location.pathname === "/today" ? "shadow-md" : ""}`}>
                         <div className="flex flex-col ">
                             <FaCalendarDay className="text-purple-900 text-2xl mb-3">
                             </FaCalendarDay>
                             <div className='text-red-600 text-xl font-bold'>Today's </div>
                         </div>
-                        <div className='text-red-600 font-bold text-4xl'>2</div>
+                        <div className='text-red-600 font-bold text-4xl'><CountTodayTask /></div>
                     </div>
                 </Link>
             </div>

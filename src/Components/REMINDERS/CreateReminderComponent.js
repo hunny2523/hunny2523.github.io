@@ -47,7 +47,7 @@ export default function CreateComponent(props) {
                                 <input ref={name} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name='name' id="name" type="text" placeholder="Reminder Title" />
                             </div>
                             <div className="mb-4">
-                                <input ref={time} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name='time' id="time" type="time" placeholder="Time" />
+                                <input ref={time} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name='time' id="time" type="datetime-local" placeholder="Time" />
                             </div>
                             <div className="mb-4">
                                 <textarea ref={desc} rows="2" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name='desc' id="desc" type="time" placeholder="Description" />

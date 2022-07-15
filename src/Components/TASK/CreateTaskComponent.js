@@ -39,7 +39,7 @@ export default function CreateTaskComponent(props) {
             {
                 !props.data ?
                     <button className='px-6 py-2.5  md:text-2xl border-blue-900 border text-blue-900 leading-tight w-full  uppercase rounded hover:bg-blue-900 hover:text-white  hover:shadow-lg focus:bg-blue-900 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out' onClick={() => { setopen(!open) }}>Create Task</button>
-                    : <FaPen className='text-blue-900' onClick={() => { setopen(!open) }}></FaPen>
+                    : <button onClick={() => { setopen(!open) }} className='py-1 px-2 rounded-md bg-yellow-500 text-white hover:bg-yellow-600' >Update</button>
             }
             {
                 open ? (
@@ -55,10 +55,10 @@ export default function CreateTaskComponent(props) {
                             </div>
                             <form className=" rounded px-4 md:px-8 pt-6 pb-8 shadow-sm">
                                 <div className="mb-4">
-                                    <input defaultValue={props.data && props.data.name} ref={name} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name='name' id="name" type="text" placeholder="Task Title" />
+                                    <input required defaultValue={props.data && props.data.name} ref={name} className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name='name' id="name" type="text" placeholder="Task Title" />
                                 </div>
                                 <div className="mb-4">
-                                    <textarea defaultValue={props.data && props.data.desc} ref={desc} rows="2" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name='desc' id="desc" type="time" placeholder="Description" />
+                                    <textarea required defaultValue={props.data && props.data.desc} ref={desc} rows="2" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name='desc' id="desc" type="time" placeholder="Description" />
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <button onClick={() => { handleTask(props.data ? "update" : "create") }} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">

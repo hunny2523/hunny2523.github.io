@@ -10,7 +10,7 @@ export default function TaskComponent() {
             <div className="text-2xl font-medium text-blue-900">Tasks</div>
             {
                 task && (
-                    task.length === 0 ? <h4 className=" text-primary text-center">click above button to create Task </h4> : task.map((data) => {
+                    task.length === 0 ? <h4 className=" mt-2 text-green-800 md:text-xl text-center">No Tasks Yet </h4> : task.map((data) => {
                         return (
                             <Task data={data} key={data.id} />)
                     })

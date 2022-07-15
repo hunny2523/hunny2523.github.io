@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
+
+@media only screen and (min-width: 766px) {
+  #rightBoxHeight {
+    height: 80vh;
+  }
+}
+
+.tooltip {
+  @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+  @apply visible z-50;
+}
+
 @tailwind utilities;

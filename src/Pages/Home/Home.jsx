@@ -27,7 +27,9 @@ export default function Home() {
   const removeReminder = () => {
     const date = new Date();
     reminders && reminders.map(async (reminder) => {
-      if (+Date.parse(`${date.toDateString()} ${reminder.time}:10 GMT+0530 (India Standard Time)`) < Date.now()) {
+      // console.log("today date", Date.now());
+      // console.log("reminder date", +Date.parse(`${reminder.time}`));
+      if (+Date.parse(`${reminder.time}`) < Date.now()) {
         await dispatch({ type: "DELETE_REMINDER", payload: reminder.id });
       }
     })
@@ -35,19 +37,21 @@ export default function Home() {
 
 
   return (
-    <div>
+    <div className="w-full">
       <Router>
         <NavbarComponent />
         <CurrentTimeComponent />
         <div className="md:flex md:mx-auto ">
-          <div className="md:w-5/12 lg:px-12 md:px-4  border-r-2">
+          <div className="md:w-5/12  lg:px-12 md:px-4  border-r-2">
             <BoxComponent />
           </div>
-          <div className="md:w-7/12">
+          <div className="md:w-7/12 overflow-auto" id="rightBoxHeight">
             <Routes>
               <Route exact path="/tasks" element={< TaskComponent />}></Route>
               <Route exact path="/reminders" element={< CardComponet />}></Route>
+              <Route exact path="/" element={< CardComponet />}></Route>
               <Route exact path="/all" element={[< CardComponet />, <TaskComponent />]}></Route>
+              <Route exact path="/today" element={< CardComponet today={"today"} />}></Route>
             </Routes>
           </div>
         </div>

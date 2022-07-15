@@ -34,7 +34,6 @@ export default function Task(props) {
         setTimeout(() => {
             task.map((task) => {
                 if (task.check) {
-                    console.log("in set time inisde")
                     deleteTask(task.id)(dispatch);
                 }
             })
@@ -46,7 +45,7 @@ export default function Task(props) {
     // }
     return (
         <>
-            <div className="flex md:mb-2 justify-between items-center rounded-lg shadow-sm md:w-3/4 w-full max-h-fit border border-blue-900 bg-white p-3 md:p-4 ">
+            <div className="flex md:mb-2 mb-1 justify-between items-center rounded-lg shadow-sm md:w-3/4 w-full max-h-fit border border-blue-900 bg-white p-3 md:p-4 ">
 
                 <div >
                     <div className="flex  items-center">
@@ -61,7 +60,8 @@ export default function Task(props) {
                         {data.desc}
                     </p>
                     <div className='flex space-x-2'>
-                        <FaTrash className='text-blue-900' onClick={() => { handleDelete(data.id) }}>Delete</FaTrash>
+                        {/* <FaTrash className='text-blue-900' onClick={() => { handleDelete(data.id) }}>Delete</FaTrash> */}
+                        <button onClick={() => { handleDelete(data.id) }} className='py-1 px-2 rounded-md bg-red-500 hover:bg-red-600 text-white'>Delete</button>
                         <CreateTaskComponent update={true} data={data} />
                     </div>
                 </div>
