@@ -5,7 +5,6 @@ export default (newReminder) => (dispatch, user) => {
 
   return new Promise(async (resolve, reject) => {
     dispatch({ type: "ADD_REMINDER_BEGIN" });
-    console.log(user)
     let reminderOfLocalStorage = JSON.parse(localStorage.getItem("reminders"));
     try {
       if (navigator.onLine) {
@@ -20,8 +19,6 @@ export default (newReminder) => (dispatch, user) => {
                 contents: { en: `${newReminder.desc}` },
                 headings: { en: `${newReminder.name}` },
                 send_after: `${newReminder.time.slice(0, 10)} ${newReminder.time.slice(11, 16)}:00 GMT+0530`,
-                // 2015-09-24 14:00:00 GMT-0700
-                // send_after: `${date.toDateString()} ${newReminder.time}:00 GMT+0530 (India Standard Time)`,
                 include_player_ids: [user]
               },
               {

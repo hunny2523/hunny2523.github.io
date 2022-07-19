@@ -1,8 +1,8 @@
 import axios from "axios";
-// import { useToasts } from 'react-toast-notifications';
+
 
 export default (id) => async (dispatch) => {
-    // const { addToast } = useToasts();
+
     dispatch({ type: "DELETE_REMINDER_BEGIN" });
     try {
 
@@ -17,7 +17,6 @@ export default (id) => async (dispatch) => {
                 }
             )
         if (response.data.success) {
-            // addToast('Deleted Successfully', { appearance: 'success', autoDismiss: true });
 
             await dispatch({ type: "DELETE_REMINDER", payload: id });
         }

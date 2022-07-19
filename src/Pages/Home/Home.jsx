@@ -27,8 +27,6 @@ export default function Home() {
   const removeReminder = () => {
     const date = new Date();
     reminders && reminders.map(async (reminder) => {
-      // console.log("today date", Date.now());
-      // console.log("reminder date", +Date.parse(`${reminder.time}`));
       if (+Date.parse(`${reminder.time}`) < Date.now()) {
         await dispatch({ type: "DELETE_REMINDER", payload: reminder.id });
       }

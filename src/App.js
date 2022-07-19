@@ -16,11 +16,9 @@ function App() {
 
   useEffect(() => {
     async function OnesignalInit() {
-      console.log("init begin")
       await OneSignal.init({ appId: process.env.REACT_APP_APP_ID, allowLocalhostAsSecureOrigin: true });
       const user = await OneSignal.getUserId();
       dispatch({ type: "SET_USER_ID", payload: user });
-      console.log(user)
     }
     OnesignalInit();
   }, [])

@@ -12,7 +12,6 @@ const INITIAL_STATE = {
 export const reminderContext = createContext(INITIAL_STATE);
 
 const reminderReducer = (state, action) => {
-    console.log('action', action, 'state', state);
     switch (action.type) {
         case "SET_USER_ID":
             return {
@@ -66,38 +65,7 @@ const reminderReducer = (state, action) => {
                 loading: false,
                 error: action.payload
             };
-        case "UPDATE_REMINDER_BEGIN":
-            return {
-                ...state,
-                loading: false,
-                error: null
-            };
-        case "UPDATE_REMINDER": {
-            const updatedReminders =
-                state.reminders.map((reminder) => {
-                    if (action.payload.id === reminder.id) {
-                        return { ...reminder, name: action.payload.name, time: action.payload.time, desc: action.payload.desc }
-                    }
-                    return reminder;
-                })
-
-            console.log(updatedReminders)
-            return {
-                ...state,
-                reminders: updatedReminders,
-                error: null,
-                loading: false
-            }
-        }
-        case "UPDATE_REMINDER_FAILURE":
-            return {
-                ...state,
-                loading: false,
-                error: action.payload
-            };
-
         case "ADD_REMINDER_FAILURE":
-            console.log(action.payload.errors)
             return {
                 ...state,
                 loading: false,
@@ -178,7 +146,7 @@ const reminderReducer = (state, action) => {
                 loading: false
             }
         }
-        case "UPDATE_TASK":
+        case "UPDATE_TASK_FAILURE":
             return {
                 ...state,
                 loading: false,

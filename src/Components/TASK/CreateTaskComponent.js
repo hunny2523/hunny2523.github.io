@@ -18,7 +18,6 @@ export default function CreateTaskComponent(props) {
     let name = useRef();
     let desc = useRef();
     const handleTask = (taskFunction) => {
-        console.log(taskFunction)
         const body = {
             name: name.current?.value,
             desc: desc.current?.value
